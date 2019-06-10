@@ -45,3 +45,45 @@ rules: [{
   }
 }]
 ```
+
+### css-loader
+只负责加载css模块,不会将加载的css样式应用到html
+```
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [ 'style-loader', 'css-loader' ]
+    }
+  ]
+}
+```
+
+### style-loader
+* 负责将css-loader加载到的css样式动态的添加到html-head-style标签中
+* 一般建议将 style-loader 与 css-loader 结合使用
+
+### sass-loader
+#### 安装
+`yarn add sass-loader node-sass webpack --dev`
+* node-sass 和 webpack 是 sass-loader 的 peerDependency，因此能够精确控制它们的版本。
+* loader执行顺序：从下至上，从右至左
+* 通过将 style-loader 和 css-loader 与 sass-loader 链式调用，可以立刻将样式作用在 DOM 元素。
+```
+// webpack.config.js
+module.exports = {
+...
+module: {
+  rules: [{
+    test: /\.scss$/,
+    use: [{
+        loader: "style-loader" // 将 JS 字符串生成为 style 节点
+    }, {
+        loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+    }, {
+        loader: "sass-loader" // 将 Sass 编译成 CSS
+    }]
+  }]
+}
+};
+```

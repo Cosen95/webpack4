@@ -1,3 +1,9 @@
-var avatar = require('./static/github.jpg');
+import avatar from './static/github.jpg';
+import './index.scss';
 
-console.log('init');
+var img = new Image();
+img.src = avatar;
+img.classList.add('avatar');
+
+var root = document.getElementById('root');
+root.append(img);
