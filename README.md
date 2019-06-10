@@ -47,7 +47,9 @@ rules: [{
 ```
 
 ### css-loader
-只负责加载css模块,不会将加载的css样式应用到html
+* 只负责加载css模块,不会将加载的css样式应用到html
+* importLoaders用于指定在 css-loader 前应用的 loader 的数量
+* 查询参数 modules 会启用 CSS 模块规范
 ```
 module: {
   rules: [
