@@ -87,3 +87,27 @@ module: {
 }
 };
 ```
+
+### postcss-loader
+* webpack4中使用postcss-loader代替autoprefixer，给css3样式加浏览器前缀。具体可参考`https://blog.csdn.net/u014628388/article/details/82593185`
+```
+// webpack.config.js
+ {
+  test: /\.scss$/,
+  use: [
+    'style-loader',
+      'css-loader',
+      'sass-loader',
+      'postcss-loader'
+    ],
+}
+
+//postcss.config.js
+module.exports = {
+    plugins: [
+        require('autoprefixer')({ browsers: ['last 2 versions'] }),
+    ],
+};
+
+```
+
