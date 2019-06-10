@@ -5,6 +5,7 @@ webpack4学习
 * global(全局):通过webpack index.js运行
 * local(项目维度安装):通过npx webpack index.js运行
 * npm scripts:通过配置package.json里面的scripts字段，直接运行webpack即可。等价于`yarn run bundle -> webpack`
+* file-loader可打包处理`eot|svg|ttf|woff`等字体文件
 
 ## 知识点总结
 * 避免全局安装webpack（针对多个项目采用不同的webpack版本进行打包的场景），可采用`npx`，具体可参考`http://www.ruanyifeng.com/blog/2019/02/npx.html`
