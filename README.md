@@ -117,5 +117,33 @@ module.exports = {
 ## plugins
 > plugin可以在webpack运行到某个时刻的时候，帮你做一些事情
 ### HtmlWebpackPlugin
-> HtmlWebpackPlugin会在打包结束后，自动生成一个html文件，并把打包生成的js自动引入到这个html文件中
+* HtmlWebpackPlugin会在打包结束后，自动生成一个html文件，并把打包生成的js自动引入到这个html文件中
+```
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+...
+plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
+  ],
+};
+```
+### clean-webpack-plugin
+* clean-webpack-plugin插件用来清除残留打包文件，特别是文件末尾添加了hash之后，会导致改变文件内容后重新打包时，文件名不同而内容越来越多。
+* 新版本中的clean-webpack-plugin仅接受一个对象，默认不需要传任何参数。具体可参考`https://blog.csdn.net/qq_23521659/article/details/88353708`
+```
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+...
+plugins: [
+    new CleanWebpackPlugin()
+  ],
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+```
 
