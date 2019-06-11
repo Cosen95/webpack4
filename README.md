@@ -228,3 +228,7 @@ plugins: [
   }
 ```
 
+## devtool
+> source map就是对打包生成的代码与源代码的一种映射，主要是为了方便定位问题和排查问题。devtool关键有eval、cheap、module、inline和source-map这几块，具体可参考文档：`https://www.webpackjs.com/configuration/devtool/`
+* development环境参考配置: `'cheap-module-eval-source-map'`
+* production环境参考配置: `'cheap-module-source-map'`
