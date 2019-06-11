@@ -7,6 +7,10 @@ module.exports = {
   // devtool: 'cheap-module-eval-source-map',  // development
   // devtool: 'cheap-module-source-map',   // production
   entry: './src/index.js',
+  devServer: {
+    contentBase: './dist',
+    open: true
+  },
   module: {
     rules: [{
       test: /\.(jpg|png|gif)$/,
