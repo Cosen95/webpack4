@@ -12,6 +12,87 @@ webpack4学习
 * `npx webpack --config 配置文件名`可指定webpack配置文件（默认为webpack.config.js）
 * mode选项(可能的值为none、development或production(默认值))配置用于提供模式配置选项告诉webpack相应的使用其内置的优化。具体可参考`https://webpack.js.org/configuration/mode/#root`
 
+## entry(入口)
+### 单一入口
+```
+// webpack.config.js
+
+const config = {
+  entry: {
+    main: './src/index.js'
+  }
+};
+```
+
+### 多入口
+```
+// webpack.config.js
+
+const config = {
+  entry: {
+    main: './src/index.js',
+    sub: './src/sub.js'
+  }
+};
+```
+
+## output(输出)
+### 默认配置
+```
+// webpack.config.js
+const path = require('path');
+...
+
+const config = {
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+
+module.exports = config;
+
+```
+
+### 多个入口起点
+> 如果配置创建了多个单独的 "chunk"（例如，使用多个入口起点或使用像 CommonsChunkPlugin 这样的插件），则应该使用占位符(substitutions)来确保每个文件具有唯一的名称。
+```
+// webpack.config.js
+const path = require('path');
+{
+  entry: {
+    main: './src/index.js',
+    sub: './src/sub.js'
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  }
+}
+
+// 写入到硬盘：./dist/main.js, ./dist/sub.js
+```
+
+### 高级进阶
+> 使用cdn
+```
+// webpack.config.js
+const path = require('path');
+{
+  entry: {
+    main: './src/index.js',
+    sub: './src/sub.js'
+  },
+  output: {
+    publicPath: 'http://cdn.example.com'
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'dist')
+  }
+}
+
+// 写入到http://cdn.example.com/main.js, http://cdn.example.com/sub.js
+```
+
 ## loaders
 > webpack 可以使用 loader 来预处理文件。这允许你打包除 JavaScript 之外的任何静态资源。
 
