@@ -259,3 +259,30 @@ app.listen(3000, () => {
   console.log('server is running');
 })
 ```
+
+### Hot Module Replacement
+> 模块热替换(Hot Module Replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新各种模块，而无需进行完全刷新。
+```
+// webpack.config.js
+...
+const webpack = require('webpack');
+....
+plugins: [
+  <!-- new HtmlWebpackPlugin({
+    template: 'src/index.html'
+  }),
+  new CleanWebpackPlugin(), -->
+  new webpack.HotModuleReplacementPlugin()
+],
+
+```
+修改 index.js 文件，以便当 print.js 内部发生变更时可以告诉 webpack 接受更新的模块
+```
+// index.js
+if (module.hot) {
+  module.hot.accept('./print.js', function() {
+    <!-- console.log('Accepting the updated printMe module!');
+    printMe(); -->
+  })
+}
+```
