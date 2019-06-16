@@ -1,68 +1,77 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   // devtool: 'cheap-module-eval-source-map',  // development
   // devtool: 'cheap-module-source-map',   // production
-  entry: './src/index.js',
+  entry: "./src/index.js",
   devServer: {
-    contentBase: './dist',
+    contentBase: "./dist",
     open: true,
     hot: true,
     hotOnly: true
   },
   module: {
-    rules: [{
-      test: /\.(jpg|png|gif)$/,
-      use: {
-        loader: 'url-loader',
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
         options: {
-          name: '[name]_[hash].[ext]',
-          outputPath: 'images/',
-          limit: 204800
+          presets: ['@babel/preset-env']
         }
-      }
-    }, {
-      test: /\.(eot|svg|ttf|woff)$/,
-      use: {
-        loader: 'file-loader',
-      }
-    }, {
-      test: /\.scss$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: {
+          loader: "url-loader",
           options: {
-            importLoaders: 2,  // 用于指定在 css-loader 前应用的 loader 的数量
-            // modules: true   // 查询参数 modules 会启用 CSS 模块规范
+            name: "[name]_[hash].[ext]",
+            outputPath: "images/",
+            limit: 204800
           }
-        },
-          'sass-loader',
-          'postcss-loader'
-        ],
-    }, {
-      test: /\.css$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'postcss-loader'
-        ],
-    }]
+        }
+      },
+      {
+        test: /\.(eot|svg|ttf|woff)$/,
+        use: {
+          loader: "file-loader"
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 2 // 用于指定在 css-loader 前应用的 loader 的数量
+              // modules: true   // 查询参数 modules 会启用 CSS 模块规范
+            }
+          },
+          "sass-loader",
+          "postcss-loader"
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader", "postcss-loader"]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: "src/index.html"
     }),
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   output: {
-    publicPath: '/',
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    publicPath: "/",
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist")
   }
-}
+};
