@@ -229,6 +229,33 @@ plugins: [
 ```
 
 ## devtool
+### source map
 > source map就是对打包生成的代码与源代码的一种映射，主要是为了方便定位问题和排查问题。devtool关键有eval、cheap、module、inline和source-map这几块，具体可参考文档：`https://www.webpackjs.com/configuration/devtool/`
 * development环境参考配置: `'cheap-module-eval-source-map'`
 * production环境参考配置: `'cheap-module-source-map'`
+
+### webpack-dev-server
+> webpack-dev-server提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)。具体可参考`https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server`
+
+### webpack-dev-middleware
+> webpack-dev-middleware 是一个容器(wrapper)，它可以把 webpack 处理后的文件传递给一个服务器(server)。 webpack-dev-server 在内部使用了它，同时，它也可以作为一个单独的包来使用，以便进行更多自定义设置来实现更多的需求
+```
+// server.js
+// 使用webpack-dev-middleware
+// https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-middleware
+const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const config = require('./webpack.config.js');
+const complier = webpack(config);
+
+const app = express();
+
+app.use(webpackDevMiddleware(complier, {
+  publicPath: config.output.publicPath
+}))
+
+app.listen(3000, () => {
+  console.log('server is running');
+})
+```
