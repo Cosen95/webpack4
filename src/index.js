@@ -8,4 +8,4 @@
 // import './index.scss';
 // var root = document.getElementById('root');
 // root.innerHTML = '<div class="iconfont icon-print"></div>';
-console.log('jack-cool')
+console.log('jack-cool && ')
