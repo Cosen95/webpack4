@@ -266,23 +266,25 @@ app.listen(3000, () => {
 // webpack.config.js
 ...
 const webpack = require('webpack');
-....
+...
+devServer: {
+  contentBase: './dist',
+  open: true,
+  hot: true,
+  hotOnly: true
+},
 plugins: [
-  <!-- new HtmlWebpackPlugin({
-    template: 'src/index.html'
-  }),
-  new CleanWebpackPlugin(), -->
+  ...
   new webpack.HotModuleReplacementPlugin()
 ],
 
 ```
-修改 index.js 文件，以便当 print.js 内部发生变更时可以告诉 webpack 接受更新的模块
+如果已经通过 HotModuleReplacementPlugin 启用了模块热替换(Hot Module Replacement)，则它的接口将被暴露在 module.hot 属性下面。通常，用户先要检查这个接口是否可访问，然后再开始使用它。
 ```
 // index.js
 if (module.hot) {
-  module.hot.accept('./print.js', function() {
-    <!-- console.log('Accepting the updated printMe module!');
-    printMe(); -->
+  module.hot.accept('./library.js', function() {
+    // 使用更新过的 library 模块执行某些操作...
   })
 }
 ```
