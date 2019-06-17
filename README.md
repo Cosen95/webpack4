@@ -288,3 +288,51 @@ if (module.hot) {
   })
 }
 ```
+
+## babel
+### babel编译es6、jsx等
+* @babel/core babel核心模块
+* @babel-preset-env 编译es6等
+* @babel/preset-react 转换jsx
+* @babel/plugin-transform-runtime 避免polyfill污染全局变量，减少打包体积
+* @babel/polyfill es6内置方法和函数转化垫片
+```
+module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      }
+    }
+  ]
+}
+```
+
+### 按需引入polyfill
+在src下的index.js中全局引入@babel/polyfill并写入es6语法，但是这样有一个缺点:
+全局引入@babel/polyfill的这种方式可能会导入代码中不需要的polyfill，从而使打包体积更大，修改配置
+```
+module: {
+  rules: [
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: "babel-loader",
+      options: {
+        presets: [['@babel/preset-env', {
+          useBuiltIns: 'usage',
+          targets: {
+            chrome: "67"
+          }
+        }]]
+      }
+    }
+  ]
+}
+```
+这就配置好了按需引入。配置了按需引入polyfill后，用到es6以上的函数，babel会自动导入相关的polyfill，这样能大大减少打包编译后的体积。
