@@ -296,6 +296,7 @@ if (module.hot) {
 * @babel/preset-react 转换jsx
 * @babel/plugin-transform-runtime 避免polyfill污染全局变量，减少打包体积
 * @babel/polyfill es6内置方法和函数转化垫片
+* @babel/runtime
 ```
 module: {
   rules: [
@@ -304,35 +305,37 @@ module: {
       exclude: /node_modules/,
       use: {
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env']
-        }
       }
     }
   ]
+}
+```
+新建.babelrc文件
+```
+{
+  "presets": ["@babel/preset-env"],
+  "plugins": ["@babel/plugin-transform-runtime"]
 }
 ```
 
 ### 按需引入polyfill
 在src下的index.js中全局引入@babel/polyfill并写入es6语法，但是这样有一个缺点:
-全局引入@babel/polyfill的这种方式可能会导入代码中不需要的polyfill，从而使打包体积更大，修改配置
+全局引入@babel/polyfill的这种方式可能会导入代码中不需要的polyfill，从而使打包体积更大，修改.babelrc配置
 ```
-module: {
-  rules: [
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: "babel-loader",
-      options: {
-        presets: [['@babel/preset-env', {
-          useBuiltIns: 'usage',
-          targets: {
-            chrome: "67"
-          }
-        }]]
-      }
-    }
-  ]
+
+`yarn add core-js@2 @babel/runtime-corejs2 --dev`
+
+{
+  "presets": ["@babel/preset-env", {
+    "useBuiltIns": "usage"
+  }],
+  "plugins": ["@babel/plugin-transform-runtime"]
 }
 ```
 这就配置好了按需引入。配置了按需引入polyfill后，用到es6以上的函数，babel会自动导入相关的polyfill，这样能大大减少打包编译后的体积。
+
+### babel-runtime和babel-polyfill的区别
+> 参考`https://www.jianshu.com/p/73ba084795ce`
+* babel-polyfill会”加载整个polyfill库”，针对编译的代码中新的API进行处理，并且在代码中插入一些帮助函数
+* babel-polyfill解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致污染了全局环境，并且不同的代码文件中包含重复的代码，导致编译后的代码体积变大。 Babel为了解决这个问题，提供了单独的包babel-runtime用以提供编译模块的工具函数， 启用插件babel-plugin-transform-runtime后，Babel就会使用babel-runtime下的工具函数
+* babel-runtime适合在组件，类库项目中使用，而babel-polyfill适合在业务项目中使用。
