@@ -1,19 +1,9 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: "development",
-  devtool: 'cheap-module-eval-source-map',  // development
-  // devtool: 'cheap-module-source-map',   // production
   entry: "./src/index.js",
-  devServer: {
-    contentBase: "./dist",
-    open: true,
-    hot: true,
-    hotOnly: true
-  },
   module: {
     rules: [
       {
@@ -66,14 +56,11 @@ module.exports = {
       template: "src/index.html"
     }),
     new CleanWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin()
   ],
-  optimization: {
-    usedExports: true
-  },
   output: {
     publicPath: "/",
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
   }
-};
+}
