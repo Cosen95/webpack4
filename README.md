@@ -313,7 +313,7 @@ module: {
 新建.babelrc文件
 ```
 {
-  "presets": ["@babel/preset-env"],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": ["@babel/plugin-transform-runtime"]
 }
 ```
@@ -326,9 +326,14 @@ module: {
 `yarn add core-js@2 @babel/runtime-corejs2 --dev`
 
 {
-  "presets": ["@babel/preset-env", {
-    "useBuiltIns": "usage"
-  }],
+  "presets": [
+    [
+      "@babel/preset-env", {
+      "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-react"
+  ],
   "plugins": ["@babel/plugin-transform-runtime"]
 }
 ```
