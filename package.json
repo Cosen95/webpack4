@@ -1,5 +1,6 @@
 {
   "name": "webpack4",
+  "sideEffects": false,
   "version": "1.0.0",
   "private": true,
   "description": "webpack version4",

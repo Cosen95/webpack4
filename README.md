@@ -344,3 +344,18 @@ module: {
 * babel-polyfill会”加载整个polyfill库”，针对编译的代码中新的API进行处理，并且在代码中插入一些帮助函数
 * babel-polyfill解决了Babel不转换新API的问题，但是直接在代码中插入帮助函数，会导致污染了全局环境，并且不同的代码文件中包含重复的代码，导致编译后的代码体积变大。 Babel为了解决这个问题，提供了单独的包babel-runtime用以提供编译模块的工具函数， 启用插件babel-plugin-transform-runtime后，Babel就会使用babel-runtime下的工具函数
 * babel-runtime适合在组件，类库项目中使用，而babel-polyfill适合在业务项目中使用。
+
+## 高级概念
+### tree shaking(js)
+> tree shaking可清除代码中无用的js代码，只支持import方式引入，不支持commonjs的方式引入
+mode是production的无需配置，下面的配置是针对development的
+```
+// webpack.config.js
+optimization: {
+  usedExports: true
+}
+
+
+// package.json
+"sideEffects": false,
+```

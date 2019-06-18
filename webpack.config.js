@@ -68,6 +68,9 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
+  optimization: {
+    usedExports: true
+  },
   output: {
     publicPath: "/",
     filename: "bundle.js",
