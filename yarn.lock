@@ -1008,6 +1008,10 @@ babel-loader@^8.0.6:
     mkdirp "^0.5.1"
     pify "^4.0.1"
 
+babel-plugin-dynamic-import-webpack@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/babel-plugin-dynamic-import-webpack/download/babel-plugin-dynamic-import-webpack-1.1.0.tgz#955306608cdae6191cd1d3f50cf93826ff69f4e1"
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/balanced-match/download/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -1527,7 +1531,7 @@ core-js-pure@3.1.4:
   version "3.1.4"
   resolved "https://registry.npm.taobao.org/core-js-pure/download/core-js-pure-3.1.4.tgz#5fa17dc77002a169a3566cc48dc774d2e13e3769"
 
-core-js@^2.6.5:
+core-js@2, core-js@^2.6.5:
   version "2.6.9"
   resolved "https://registry.npm.taobao.org/core-js/download/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
 

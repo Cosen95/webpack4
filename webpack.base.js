@@ -3,7 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    main: "./src/index.js"
+  },
   module: {
     rules: [
       {
@@ -58,9 +60,14 @@ module.exports = {
     new CleanWebpackPlugin(),
     // new webpack.HotModuleReplacementPlugin()
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   output: {
-    publicPath: "/",
-    filename: "bundle.js",
+    // publicPath: "./",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist")
   }
 }

@@ -9,8 +9,9 @@
     "watch": "webpack --watch",
     "start": "webpack-dev-server",
     "server": "node server.js",
-    "dev": "webpack-dev-server --config ./build/webpack.dev.js",
-    "build": "webpack --config ./build/webpack.prod.js"
+    "dev-build": "webpack --config ./webpack.dev.js",
+    "dev": "webpack-dev-server --config ./webpack.dev.js",
+    "build": "webpack --config ./webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-dynamic-import-webpack": "^1.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^2.1.1",
     "express": "^4.17.1",
@@ -43,6 +45,8 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.5"
+    "@babel/runtime": "^7.4.5",
+    "core-js": "2",
+    "lodash": "^4.17.11"
   }
 }
