@@ -359,3 +359,35 @@ optimization: {
 // package.json
 "sideEffects": false,
 ```
+
+### Code Spliting
+> 代码分割，和webpack无关
+* 同步代码(需在webpack.config.js中配置optimization)
+```
+// index.js
+import _ from 'lodash';
+
+console.log(_.join(['a','b','c'], '****'))
+
+// 在webpack.base.js里做相关配置
+optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+```
+* 异步代码(无需任何配置，但需安装`babel-plugin-dynamic-import-webpack`包)
+```
+// index.js
+function getComponent() {
+  return import('lodash').then(({ default: _ }) => {
+    const element = document.createElement('div');
+    element.innerHTML = _.join(['Jack', 'Cool'], '-');
+    return element;
+  })
+}
+
+getComponent().then(el => {
+  document.body.appendChild(el);
+})
+```
