@@ -376,7 +376,7 @@ optimization: {
     }
   },
 ```
-* 异步代码(无需任何配置，但需安装`babel-plugin-dynamic-import-webpack`包)
+* 异步代码(无需任何配置，但需安装`babel-plugin-dynamic-import-webpack`包。参考`https://www.cnblogs.com/chaoyueqi/p/9996369.html`)
 ```
 // index.js
 function getComponent() {
