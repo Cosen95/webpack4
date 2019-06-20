@@ -23,7 +23,7 @@
 // console.log(_.join(['a','b','c'], '****'))
 
 function getComponent() {
-  return import('lodash').then(({ default: _ }) => {
+  return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
     const element = document.createElement('div');
     element.innerHTML = _.join(['Jack', 'Cool'], '-');
     return element;
