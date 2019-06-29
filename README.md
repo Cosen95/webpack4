@@ -228,6 +228,32 @@ plugins: [
   }
 ```
 
+### SplitChunksPlugin
+* 具体概念可参考`https://juejin.im/post/5af15e895188256715479a9a`
+
+```
+splitChunks: {
+    chunks: "async",
+    minSize: 30000,
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    automaticNameDelimiter: '~',
+    name: true,
+    cacheGroups: {
+        vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+        },
+    default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+        }
+    }
+}
+```
+
 ## devtool
 ### source map
 > source map就是对打包生成的代码与源代码的一种映射，主要是为了方便定位问题和排查问题。devtool关键有eval、cheap、module、inline和source-map这几块，具体可参考文档：`https://www.webpackjs.com/configuration/devtool/`
