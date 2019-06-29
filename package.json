@@ -9,9 +9,10 @@
     "watch": "webpack --watch",
     "start": "webpack-dev-server",
     "server": "node server.js",
-    "dev-build": "webpack --config ./webpack.dev.js",
+    "dev-build": "webpack --profile --json > stats.json --config ./webpack.dev.js",
     "dev": "webpack-dev-server --config ./webpack.dev.js",
-    "build": "webpack --config ./webpack.prod.js"
+    "build": "webpack --config ./webpack.prod.js",
+    "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "express": "^4.17.1",
     "file-loader": "^4.0.0",
@@ -39,6 +41,7 @@
     "style-loader": "^0.23.1",
     "url-loader": "^2.0.0",
     "webpack": "^4.33.0",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.3",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-dev-server": "^3.7.1",
