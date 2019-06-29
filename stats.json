@@ -1,10 +1,12 @@
+Webpack Bundle Analyzer is started at http://127.0.0.1:8888
+Use Ctrl+C to close it
 {
   "errors": [],
   "warnings": [],
   "version": "4.33.0",
   "hash": "2c68d754bbfc1d995bab",
-  "time": 4894,
-  "builtAt": 1561801295032,
+  "time": 4612,
+  "builtAt": 1561805297925,
   "publicPath": "",
   "outputPath": "D:\\webpack4\\dist",
   "assetsByChunkName": {
@@ -117,8 +119,8 @@
           "issuerName": null,
           "issuerPath": null,
           "profile": {
-            "factory": 303,
-            "building": 1893
+            "factory": 279,
+            "building": 1729
           },
           "failed": false,
           "errors": 0,
@@ -198,14 +200,14 @@
               "identifier": "D:\\webpack4\\node_modules\\babel-loader\\lib\\index.js!D:\\webpack4\\src\\index.js",
               "name": "./src/index.js",
               "profile": {
-                "factory": 303,
-                "building": 1893
+                "factory": 279,
+                "building": 1729
               }
             }
           ],
           "profile": {
-            "factory": 14,
-            "building": 1612
+            "factory": 17,
+            "building": 1480
           },
           "failed": false,
           "errors": 0,
@@ -251,8 +253,8 @@
               "identifier": "D:\\webpack4\\node_modules\\babel-loader\\lib\\index.js!D:\\webpack4\\src\\index.js",
               "name": "./src/index.js",
               "profile": {
-                "factory": 303,
-                "building": 1893
+                "factory": 279,
+                "building": 1729
               }
             },
             {
@@ -260,14 +262,14 @@
               "identifier": "D:\\webpack4\\node_modules\\lodash\\lodash.js",
               "name": "./node_modules/lodash/lodash.js",
               "profile": {
-                "factory": 14,
-                "building": 1612
+                "factory": 17,
+                "building": 1480
               }
             }
           ],
           "profile": {
-            "factory": 45,
-            "building": 48
+            "factory": 38,
+            "building": 16
           },
           "failed": false,
           "errors": 0,
@@ -313,8 +315,8 @@
               "identifier": "D:\\webpack4\\node_modules\\babel-loader\\lib\\index.js!D:\\webpack4\\src\\index.js",
               "name": "./src/index.js",
               "profile": {
-                "factory": 303,
-                "building": 1893
+                "factory": 279,
+                "building": 1729
               }
             },
             {
@@ -322,14 +324,14 @@
               "identifier": "D:\\webpack4\\node_modules\\lodash\\lodash.js",
               "name": "./node_modules/lodash/lodash.js",
               "profile": {
-                "factory": 14,
-                "building": 1612
+                "factory": 17,
+                "building": 1480
               }
             }
           ],
           "profile": {
-            "factory": 45,
-            "building": 48
+            "factory": 38,
+            "building": 16
           },
           "failed": false,
           "errors": 0,
@@ -391,14 +393,14 @@
           "identifier": "D:\\webpack4\\node_modules\\babel-loader\\lib\\index.js!D:\\webpack4\\src\\index.js",
           "name": "./src/index.js",
           "profile": {
-            "factory": 303,
-            "building": 1893
+            "factory": 279,
+            "building": 1729
           }
         }
       ],
       "profile": {
-        "factory": 14,
-        "building": 1612
+        "factory": 17,
+        "building": 1480
       },
       "failed": false,
       "errors": 0,
@@ -444,8 +446,8 @@
           "identifier": "D:\\webpack4\\node_modules\\babel-loader\\lib\\index.js!D:\\webpack4\\src\\index.js",
           "name": "./src/index.js",
           "profile": {
-            "factory": 303,
-            "building": 1893
+            "factory": 279,
+            "building": 1729
           }
         },
         {
@@ -453,14 +455,14 @@
           "identifier": "D:\\webpack4\\node_modules\\lodash\\lodash.js",
           "name": "./node_modules/lodash/lodash.js",
           "profile": {
-            "factory": 14,
-            "building": 1612
+            "factory": 17,
+            "building": 1480
           }
         }
       ],
       "profile": {
-        "factory": 45,
-        "building": 48
+        "factory": 38,
+        "building": 16
       },
       "failed": false,
       "errors": 0,
@@ -506,8 +508,8 @@
           "identifier": "D:\\webpack4\\node_modules\\babel-loader\\lib\\index.js!D:\\webpack4\\src\\index.js",
           "name": "./src/index.js",
           "profile": {
-            "factory": 303,
-            "building": 1893
+            "factory": 279,
+            "building": 1729
           }
         },
         {
@@ -515,14 +517,14 @@
           "identifier": "D:\\webpack4\\node_modules\\lodash\\lodash.js",
           "name": "./node_modules/lodash/lodash.js",
           "profile": {
-            "factory": 14,
-            "building": 1612
+            "factory": 17,
+            "building": 1480
           }
         }
       ],
       "profile": {
-        "factory": 45,
-        "building": 48
+        "factory": 38,
+        "building": 16
       },
       "failed": false,
       "errors": 0,
@@ -564,8 +566,8 @@
       "issuerName": null,
       "issuerPath": null,
       "profile": {
-        "factory": 303,
-        "building": 1893
+        "factory": 279,
+        "building": 1729
       },
       "failed": false,
       "errors": 0,
@@ -669,8 +671,8 @@
               "issuerName": null,
               "issuerPath": null,
               "profile": {
-                "factory": 207,
-                "building": 110
+                "factory": 224,
+                "building": 106
               },
               "failed": false,
               "errors": 0,
@@ -715,14 +717,14 @@
                   "identifier": "D:\\webpack4\\node_modules\\html-webpack-plugin\\lib\\loader.js!D:\\webpack4\\src\\index.html",
                   "name": "./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html",
                   "profile": {
-                    "factory": 207,
-                    "building": 110
+                    "factory": 224,
+                    "building": 106
                   }
                 }
               ],
               "profile": {
                 "factory": 18,
-                "building": 3072
+                "building": 2800
               },
               "failed": false,
               "errors": 0,
@@ -768,8 +770,8 @@
                   "identifier": "D:\\webpack4\\node_modules\\html-webpack-plugin\\lib\\loader.js!D:\\webpack4\\src\\index.html",
                   "name": "./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html",
                   "profile": {
-                    "factory": 207,
-                    "building": 110
+                    "factory": 224,
+                    "building": 106
                   }
                 },
                 {
@@ -778,13 +780,13 @@
                   "name": "./node_modules/lodash/lodash.js",
                   "profile": {
                     "factory": 18,
-                    "building": 3072
+                    "building": 2800
                   }
                 }
               ],
               "profile": {
-                "factory": 503,
-                "building": 45
+                "factory": 474,
+                "building": 15
               },
               "failed": false,
               "errors": 0,
@@ -830,8 +832,8 @@
                   "identifier": "D:\\webpack4\\node_modules\\html-webpack-plugin\\lib\\loader.js!D:\\webpack4\\src\\index.html",
                   "name": "./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html",
                   "profile": {
-                    "factory": 207,
-                    "building": 110
+                    "factory": 224,
+                    "building": 106
                   }
                 },
                 {
@@ -840,13 +842,13 @@
                   "name": "./node_modules/lodash/lodash.js",
                   "profile": {
                     "factory": 18,
-                    "building": 3072
+                    "building": 2800
                   }
                 }
               ],
               "profile": {
-                "factory": 503,
-                "building": 45
+                "factory": 474,
+                "building": 15
               },
               "failed": false,
               "errors": 0,
@@ -903,8 +905,8 @@
           "issuerName": null,
           "issuerPath": null,
           "profile": {
-            "factory": 207,
-            "building": 110
+            "factory": 224,
+            "building": 106
           },
           "failed": false,
           "errors": 0,
@@ -949,14 +951,14 @@
               "identifier": "D:\\webpack4\\node_modules\\html-webpack-plugin\\lib\\loader.js!D:\\webpack4\\src\\index.html",
               "name": "./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html",
               "profile": {
-                "factory": 207,
-                "building": 110
+                "factory": 224,
+                "building": 106
               }
             }
           ],
           "profile": {
             "factory": 18,
-            "building": 3072
+            "building": 2800
           },
           "failed": false,
           "errors": 0,
@@ -1002,8 +1004,8 @@
               "identifier": "D:\\webpack4\\node_modules\\html-webpack-plugin\\lib\\loader.js!D:\\webpack4\\src\\index.html",
               "name": "./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html",
               "profile": {
-                "factory": 207,
-                "building": 110
+                "factory": 224,
+                "building": 106
               }
             },
             {
@@ -1012,13 +1014,13 @@
               "name": "./node_modules/lodash/lodash.js",
               "profile": {
                 "factory": 18,
-                "building": 3072
+                "building": 2800
               }
             }
           ],
           "profile": {
-            "factory": 503,
-            "building": 45
+            "factory": 474,
+            "building": 15
           },
           "failed": false,
           "errors": 0,
@@ -1064,8 +1066,8 @@
               "identifier": "D:\\webpack4\\node_modules\\html-webpack-plugin\\lib\\loader.js!D:\\webpack4\\src\\index.html",
               "name": "./node_modules/html-webpack-plugin/lib/loader.js!./src/index.html",
               "profile": {
-                "factory": 207,
-                "building": 110
+                "factory": 224,
+                "building": 106
               }
             },
             {
@@ -1074,13 +1076,13 @@
               "name": "./node_modules/lodash/lodash.js",
               "profile": {
                 "factory": 18,
-                "building": 3072
+                "building": 2800
               }
             }
           ],
           "profile": {
-            "factory": 503,
-            "building": 45
+            "factory": 474,
+            "building": 15
           },
           "failed": false,
           "errors": 0,
