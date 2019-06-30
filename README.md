@@ -515,3 +515,12 @@ getComponent().then(el => {
   document.body.appendChild(el);
 })
 ```
+
+### Caching(缓存)
+> 通过使用 output.filename 进行文件名替换，可以确保浏览器获取到修改后的文件。[hash] 替换可以用于在文件名中包含一个构建相关(build-specific)的 hash，但是更好的方式是使用 [contenthash] 替换，当文件内容发生变化时，[contenthash]也会发生变化
+```
+output: {
+  filename: "[name].[contenthash].js",
+  chunkFilename: '[name].[contenthash].chunk.js'
+}
+```

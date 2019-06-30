@@ -48,6 +48,10 @@ const prodConfig = {
         ]
       }
     ]
+  },
+  output: {
+    filename: "[name].[contenthash].js",
+    chunkFilename: '[name].[contenthash].chunk.js'
   }
   // devServer: {
   //   contentBase: "./dist",

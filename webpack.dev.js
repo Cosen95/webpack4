@@ -40,6 +40,10 @@ const devConfig = {
   ],
   optimization: {
   },
+  output: {
+    filename: "[name].js",
+    chunkFilename: '[name].chunk.js'
+  }
 };
 
 module.exports = merge(baseConfig, devConfig);
