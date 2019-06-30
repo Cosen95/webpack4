@@ -321,6 +321,13 @@ if (module.hot) {
 * `webpack-visualizer`: 可视化并分析你的 bundle，检查哪些模块占用空间，哪些可能是重复使用的
 * `webpack-bundle-analyzer`: 一款分析 bundle 内容的插件及 CLI 工具，以便捷的、交互式、可缩放的树状图形式展现给用户
 
+### Preloading、Prefetching
+> prefetch：会等待核心代码加载完成后，页面带宽空闲后再去加载prefectch对应的文件;preload：和主文件一起去加载
+* 可以使用谷歌浏览器Coverage工具查看代码覆盖率
+* 使用异步引入js的方式可以提高js的使用率，所以webpack建议我们多使用异步引入的方式，这也是splitChunks.chunks的默认值是"async"的原因
+* 使用魔法注释 /* webpackPrefetch: true */ ，这样在主要js加载完，带宽有空闲时，会自动下载需要引入的js
+* 使用魔法注释 /* webpackPreload: true */，区别是webpackPrefetch会等到主业务文件加载完，带宽有空闲时再去下载js，而preload是和主业务文件一起加载的
+
 ## babel
 ### babel编译es6、jsx等
 * @babel/core babel核心模块
