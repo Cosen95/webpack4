@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -12,9 +13,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
+        use: [{
           loader: "babel-loader",
-        },
+        }, {
+          loader: "imports-loader?this=>window"
+        }],
       },
       {
         test: /\.(jpg|png|gif)$/,
@@ -42,6 +45,10 @@ module.exports = {
     new CleanWebpackPlugin(),
     // new webpack.HotModuleReplacementPlugin()
     // new BundleAnalyzerPlugin()
+    new webpack.ProviderPlugin({
+      _: "lodash",
+      $: "jquery"
+    })
   ],
   optimization: {
       usedExports: true,

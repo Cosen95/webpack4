@@ -524,3 +524,52 @@ output: {
   chunkFilename: '[name].[contenthash].chunk.js'
 }
 ```
+
+### Shimming
+> webpack 编译器(compiler)能够识别遵循 ES2015 模块语法、CommonJS 或 AMD 规范编写的模块。然而，一些第三方的库(library)可能会引用一些全局依赖（例如 jQuery 中的 $）。这些库也可能创建一些需要被导出的全局变量。这些“不符合规范的模块”就是 shimming 发挥作用的地方
+* shimming 全局变量(第三方库)(ProvidePlugin相当于一个垫片)
+```
+ const path = require('path');
++ const webpack = require('webpack');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+-   }
++   },
++   plugins: [
++     new webpack.ProvidePlugin({
++       _: 'lodash'
++     })
++   ]
+  };
+```
+
+* 细粒度 shimming(this指向window)(需要安装imports-loader依赖)
+```
+ const path = require('path');
+  const webpack = require('webpack');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    },
++   module: {
++     rules: [
++       {
++         test: require.resolve('index.js'),
++         use: 'imports-loader?this=>window'
++       }
++     ]
++   },
+    plugins: [
+      new webpack.ProvidePlugin({
+        join: ['lodash', 'join']
+      })
+    ]
+  };
+```
