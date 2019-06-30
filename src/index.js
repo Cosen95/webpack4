@@ -1,6 +1,6 @@
 // import avatar from './static/github.jpg';
 // import styles from  './index.scss';
-// import './style.css';
+import './style.css';
 // var img = new Image();
 // img.src = avatar;
 // img.classList.add(styles.avatar);

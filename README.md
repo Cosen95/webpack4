@@ -254,6 +254,91 @@ splitChunks: {
 }
 ```
 
+### MiniCssExtractPlugin
+> 将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件，支持按需加载css和sourceMap
+```
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 2 // 用于指定在 css-loader 前应用的 loader 的数量
+              // modules: true   // 查询参数 modules 会启用 CSS 模块规范
+            }
+          },
+          "sass-loader",
+          "postcss-loader"
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          "css-loader",
+          "postcss-loader"
+        ]
+      }
+    ],
+  },
+};
+```
+
+### OptimizeCSSAssetsPlugin
+> webpack5可能会内置CSS 压缩器，webpack4需要自己使用压缩器，可以使用 optimize-css-assets-webpack-plugin 插件。 设置 optimization.minimizer 覆盖webpack默认提供的，确保也指定一个JS压缩器
+```
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+module.exports = {
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourcMap: true
+      }),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## devtool
 ### source map
 > source map就是对打包生成的代码与源代码的一种映射，主要是为了方便定位问题和排查问题。devtool关键有eval、cheap、module、inline和source-map这几块，具体可参考文档：`https://www.webpackjs.com/configuration/devtool/`
@@ -323,7 +408,7 @@ if (module.hot) {
 
 ### Preloading、Prefetching
 > prefetch：会等待核心代码加载完成后，页面带宽空闲后再去加载prefectch对应的文件;preload：和主文件一起去加载
-* 可以使用谷歌浏览器Coverage工具查看代码覆盖率
+* 可以使用谷歌浏览器Coverage工具查看代码覆盖率(ctrl+shift+p > show coverage)
 * 使用异步引入js的方式可以提高js的使用率，所以webpack建议我们多使用异步引入的方式，这也是splitChunks.chunks的默认值是"async"的原因
 * 使用魔法注释 /* webpackPrefetch: true */ ，这样在主要js加载完，带宽有空闲时，会自动下载需要引入的js
 * 使用魔法注释 /* webpackPreload: true */，区别是webpackPrefetch会等到主业务文件加载完，带宽有空闲时再去下载js，而preload是和主业务文件一起加载的
