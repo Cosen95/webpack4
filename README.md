@@ -736,4 +736,46 @@ webpack.config.js
 +   });
 + }
 ```
-现在来进行测试。停止服务器并刷新页面。如果浏览器能够支持 Service Worker，你应该可以看到你的应用程序还在正常运行。然而，服务器已经停止了服务，此刻是 Service Worker 在提供服务
+现在来进行测试。停止服务器并刷新页面。如果浏览器能够支持 Service Worker，你应该可以看到你的应用程序还在正常运行。然而，服务器已经停止了服务，此刻是 Service Worker 在提供服务。
+
+### TypeScript 打包配置
+> 可参考`https://www.webpackjs.com/guides/typescript/`或`https://webpack.js.org/guides/typescript/`
+* 安装ts依赖`npm install --save-dev typescript ts-loader`
+* 增加tsconfig.json配置文件
+```
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true
+  }
+}
+```
+* webpack.config.js添加对ts/tsx语法支持(ts-loader)
+```
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+```
+* 当从 npm 安装第三方库时，一定要牢记同时安装这个库的类型声明文件。可以从 TypeSearch 中找到并安装这些第三方库的类型声明文件。如`npm install --save-dev @types/lodash`
