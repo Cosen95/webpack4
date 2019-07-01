@@ -598,3 +598,87 @@ module.exports = env => {
   };
 };
 ```
+
+### library 打包配置
+> 除了打包应用程序代码，webpack 还可以用于打包 JavaScript library
+用户应该能够通过以下方式访问library:
+* ES2015 模块。例如 import library from 'library'
+* CommonJS 模块。例如 require('library')
+* 全局变量，当通过 script 脚本引入时
+
+我们打包的library中可能会用到一些第三方库，诸如lodash。现在，如果执行 webpack，你会发现创建了一个非常巨大的文件。如果你查看这个文件，会看到 lodash 也被打包到代码中。在这种场景中，我们更倾向于把 lodash 当作 peerDependency。也就是说，用户应该已经将 lodash 安装好。因此，你可以放弃对外部 library 的控制，而是将控制权让给使用 library 的用户。这可以使用 externals 配置来完成：
+```
+  // webpack.config.js
+  var path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'webpack-numbers.js'
+-   }
++   },
++   externals: {
++     lodash: {
++       commonjs: 'lodash',
++       commonjs2: 'lodash',
++       amd: 'lodash',
++       root: '_'
++     }
++   }
+  };
+```
+对于用途广泛的 library，我们希望它能够兼容不同的环境，例如 CommonJS，AMD，Node.js 或者作为一个全局变量。为了让你的 library 能够在各种用户环境(consumption)中可用，需要在 output 中添加 library 属性：
+```
+  // webpack.config.js
+  var path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+-     filename: 'library.js'
++     filename: 'library.js',
++     library: 'library'
+    },
+    externals: {
+      lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_'
+      }
+    }
+  };
+```
+当你在 import 引入模块时，这可以将你的 library bundle 暴露为名为 webpackNumbers 的全局变量。为了让 library 和其他环境兼容，还需要在配置文件中添加 libraryTarget 属性。这是可以控制 library 如何以不同方式暴露的选项。
+```
+  var path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'library.js',
++     library: 'library',
++     libraryTarget: 'umd'
+    },
+    externals: {
+      lodash: {
+        commonjs: 'lodash',
+        commonjs2: 'lodash',
+        amd: 'lodash',
+        root: '_'
+      }
+    }
+  };
+```
+我们还需要通过设置 package.json 中的 main 字段，添加生成 bundle 的文件路径。
+```
+// package.json
+{
+  ...
+  "main": "dist/library.js",
+  ...
+}
+```
