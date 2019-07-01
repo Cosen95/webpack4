@@ -573,3 +573,28 @@ output: {
     ]
   };
 ```
+
+### 环境变量
+> webpack命令行环境选项 --env允许您传入任意数量的环境变量。您的环境变量将可访问webpack.config.js。例如，--env.production或--env.NODE_ENV=local
+```
+webpack --env.NODE_ENV=local --env.production --progress
+```
+使用环境变量必须对webpack配置进行一项更改。通常，module.exports指向配置对象。要使用该env变量，必须转换module.exports为函数：
+```
+// webpack.config.js
+const path = require('path');
+
+module.exports = env => {
+  // Use env.<YOUR VARIABLE> here:
+  console.log('NODE_ENV: ', env.NODE_ENV); // 'local'
+  console.log('Production: ', env.production); // true
+
+  return {
+    entry: './src/index.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+};
+```
