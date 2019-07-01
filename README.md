@@ -682,3 +682,58 @@ module.exports = env => {
   ...
 }
 ```
+
+### PWA 打包配置
+> 渐进式网络应用程序(Progressive Web Application - PWA)，是一种可以提供类似于原生应用程序(native app)体验的网络应用程序(web app)。PWA 可以用来做很多事。其中最重要的是，在离线(offline)时应用程序能够继续运行功能。这是通过使用名为 Service Workers 的网络技术来实现的
+添加 workbox-webpack-plugin 插件，并调整 webpack.config.js 文件：
+```
+npm install workbox-webpack-plugin --save-dev
+```
+webpack.config.js
+```
+ const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const WorkboxPlugin = require('workbox-webpack-plugin');
+
+  module.exports = {
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+-     title: 'Output Management'
++     title: 'Progressive Web Application'
+-   })
++   }),
++   new WorkboxPlugin.GenerateSW({
++     // 这些选项帮助 ServiceWorkers 快速启用
++     // 不允许遗留任何“旧的” ServiceWorkers
++     clientsClaim: true,
++     skipWaiting: true
++   })
+  ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+注册Service Worker
+```
+  import _ from 'lodash';
+  import printMe from './print.js';
+
++ if ('serviceWorker' in navigator) {
++   window.addEventListener('load', () => {
++     navigator.serviceWorker.register('/sw.js').then(registration => {
++       console.log('SW registered: ', registration);
++     }).catch(registrationError => {
++       console.log('SW registration failed: ', registrationError);
++     });
++   });
++ }
+```
+现在来进行测试。停止服务器并刷新页面。如果浏览器能够支持 Service Worker，你应该可以看到你的应用程序还在正常运行。然而，服务器已经停止了服务，此刻是 Service Worker 在提供服务
