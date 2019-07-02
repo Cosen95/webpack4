@@ -347,6 +347,28 @@ module.exports = {
 
 ### webpack-dev-server
 > webpack-dev-server提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)。具体可参考`https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server`
+如果你有单独的后端开发服务器 API，并且希望在同域名下发送 API 请求 ，那么代理某些 URL 会很有用。dev-server 使用了非常强大的 `http-proxy-middleware` 包。常用于接口请求转发。具体参考`https://www.webpackjs.com/configuration/dev-server/#devserver-proxy`
+```
+devServer: {
+    contentBase: "./dist",
+    open: true,
+    hot: true,
+    hotOnly: true,
+    proxy: {
+      "/api": {
+        target: "https://other-server.example.com",
+        pathRewrite: {"^/api" : ""},
+        secure: false,
+        bypass: function(req, res, proxyOptions) {
+          if (req.headers.accept.indexOf("html") !== -1) {
+            console.log("Skipping proxy for browser request.");
+            return "/index.html";
+          }
+        }
+      }
+    }
+  },
+```
 
 ### webpack-dev-middleware
 > webpack-dev-middleware 是一个容器(wrapper)，它可以把 webpack 处理后的文件传递给一个服务器(server)。 webpack-dev-server 在内部使用了它，同时，它也可以作为一个单独的包来使用，以便进行更多自定义设置来实现更多的需求
