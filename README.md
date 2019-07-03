@@ -347,7 +347,8 @@ module.exports = {
 
 ### webpack-dev-server
 > webpack-dev-server提供了一个简单的 web 服务器，并且能够实时重新加载(live reloading)。具体可参考`https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server`
-如果你有单独的后端开发服务器 API，并且希望在同域名下发送 API 请求 ，那么代理某些 URL 会很有用。dev-server 使用了非常强大的 `http-proxy-middleware` 包。常用于接口请求转发。具体参考`https://www.webpackjs.com/configuration/dev-server/#devserver-proxy`
+#### 接口代理(请求转发) 
+> 如果你有单独的后端开发服务器 API，并且希望在同域名下发送 API 请求 ，那么代理某些 URL 会很有用。dev-server 使用了非常强大的 `http-proxy-middleware` 包。常用于接口请求转发。具体参考`https://www.webpackjs.com/configuration/dev-server/#devserver-proxy`
 ```
 devServer: {
     contentBase: "./dist",
@@ -368,6 +369,23 @@ devServer: {
       }
     }
   },
+```
+
+#### 解决单页面路由问题
+> 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html
+通过传入以下启用：
+```
+historyApiFallback: true
+```
+通过传入一个对象，比如使用 rewrites 这个选项，此行为可进一步地控制：
+```
+historyApiFallback: {
+  rewrites: [
+    { from: /^\/$/, to: '/views/landing.html' },
+    { from: /^\/subpage/, to: '/views/subpage.html' },
+    { from: /./, to: '/views/404.html' }
+  ]
+}
 ```
 
 ### webpack-dev-middleware
