@@ -819,3 +819,8 @@ module.exports = {
 };
 ```
 * 当从 npm 安装第三方库时，一定要牢记同时安装这个库的类型声明文件。可以从 TypeSearch 中找到并安装这些第三方库的类型声明文件。如`npm install --save-dev @types/lodash`
+
+## webpack性能优化
+* 及时更新node、yarn、webpack等的版本
+* 在尽可能少的模块上应用loader
+* plugin尽可能精简并确保可靠(选用社区已验证的插件)
