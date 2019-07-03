@@ -825,3 +825,4 @@ module.exports = {
 * 在尽可能少的模块上应用loader
 * plugin尽可能精简并确保可靠(选用社区已验证的插件)
 * resolve参数合理配置(具体参考`https://www.webpackjs.com/configuration/resolve/`)
+* 使用DllPlugin提高打包速度

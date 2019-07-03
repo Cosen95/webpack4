@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -45,10 +46,16 @@ module.exports = {
     new CleanWebpackPlugin(),
     // new webpack.HotModuleReplacementPlugin()
     // new BundleAnalyzerPlugin()
-    new webpack.ProviderPlugin({
-      _: "lodash",
-      $: "jquery"
-    })
+    new AddAssetHtmlWebpackPlugin({
+      filepath: path.resolve(__dirname, './dll/vendors.dll.js')
+    }),
+    new webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, './dll/vendors.manifest.json')
+    }),
+    // new webpack.ProviderPlugin({
+    //   _: "lodash",
+    //   $: "jquery"
+    // })
   ],
   optimization: {
       usedExports: true,

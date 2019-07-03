@@ -1,6 +1,6 @@
 // import avatar from './static/github.jpg';
 // import styles from  './index.scss';
-import './style.css';
+// import './style.css';
 // var img = new Image();
 // img.src = avatar;
 // img.classList.add(styles.avatar);
@@ -18,18 +18,18 @@ import './style.css';
 //   document.body.append(div);
 // }
 
-// import _ from 'lodash';
+import _ from 'lodash';
 
 // console.log(_.join(['a','b','c'], '****'))
 
-function getComponent() {
-  return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
+// function getComponent() {
+//   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
     const element = document.createElement('div');
     element.innerHTML = _.join(['Jack', 'Cool'], '~');
-    return element;
-  })
-}
+    // return element;
+//   })
+// }
 
-getComponent().then(el => {
-  document.body.appendChild(el);
-})
+// getComponent().then(el => {
+  document.body.appendChild(element);
+// })
