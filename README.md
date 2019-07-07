@@ -826,3 +826,9 @@ module.exports = {
 * plugin尽可能精简并确保可靠(选用社区已验证的插件)
 * resolve参数合理配置(具体参考`https://www.webpackjs.com/configuration/resolve/`)
 * 使用DllPlugin提高打包速度
+* 控制包文件大小(tree shaking / splitChunksPlugin)
+* thread-loader,parallel-webpack,happypack多进程打包
+* 合理利用sourceMap
+* 结合`stats.json`分析打包结果(bundle analyze)
+* 开发环境内存编译
+* 开发环境无用插件剔除
