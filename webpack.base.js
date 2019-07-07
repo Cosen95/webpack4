@@ -1,9 +1,35 @@
 const path = require("path");
+const fs = require('fs');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
 const webpack = require('webpack');
+
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: "src/index.html"
+  }),
+  new CleanWebpackPlugin(),
+  new webpack.ProvidePlugin({
+    _: "lodash",
+    $: "jquery"
+  })
+];
+
+const files = fs.readdirSync(path.resolve(__dirname, './dll'));
+files.forEach(file => {
+  if(/.*\.dll.js/.test(file)) {
+    plugins.push(new AddAssetHtmlWebpackPlugin({
+      filepath: path.resolve(__dirname, './dll', file)
+    }))
+  }
+  if(/.*\.manifest.json/.test(file)) {
+    plugins.push(new webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, './dll', file)
+    }))
+  }
+})
 
 module.exports = {
   entry: {
@@ -16,8 +42,6 @@ module.exports = {
         exclude: /node_modules/,
         use: [{
           loader: "babel-loader",
-        }, {
-          loader: "imports-loader?this=>window"
         }],
       },
       {
@@ -39,24 +63,7 @@ module.exports = {
       },
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "src/index.html"
-    }),
-    new CleanWebpackPlugin(),
-    // new webpack.HotModuleReplacementPlugin()
-    // new BundleAnalyzerPlugin()
-    new AddAssetHtmlWebpackPlugin({
-      filepath: path.resolve(__dirname, './dll/vendors.dll.js')
-    }),
-    new webpack.DllReferencePlugin({
-      manifest: path.resolve(__dirname, './dll/vendors.manifest.json')
-    }),
-    // new webpack.ProviderPlugin({
-    //   _: "lodash",
-    //   $: "jquery"
-    // })
-  ],
+  plugins,
   optimization: {
       usedExports: true,
       splitChunks: {
